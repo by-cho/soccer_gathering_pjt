@@ -37,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
       roomInfo: 'PL',
       tag: '첼시',
       title: '방 제목 입니다1',
-      place: '서울시 마포구',
+      place: '마포구',
       date: '2023-12-24',
-      time: '12:24pm',
+      time: '12:24',
       peopleNum: '12',
       maxNum: '30',
     ),
@@ -47,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
       roomInfo: '라리가',
       tag: '첼시',
       title: '방 제목 입니다2',
-      place: '서울시 여의도동',
+      place: '여의도동',
       date: '2023-12-25',
-      time: '12:25pm',
+      time: '12:25',
       peopleNum: '25',
       maxNum: '30',
     ),
@@ -57,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
       roomInfo: '세리에A',
       tag: '첼시',
       title: '방 제목 입니다3',
-      place: '서울시 중구',
+      place: '중구',
       date: '2023-12-26',
-      time: '12:26pm',
+      time: '12:26',
       peopleNum: '26',
       maxNum: '30',
     ),
@@ -101,21 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Column(
-                      children: roomList
-                          .map((e) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                child: Column(
-                                  children: [
-                                    GatheringRoom(
-                                      roomList: roomList,
-                                    ),
-                                  ],
-                                ),
-                              ))
-                          .toList(),
-                    ),
+                    GatheringRoom(roomList: roomList),
                     SizedBox(
                       width: double.infinity,
                       height: 40,

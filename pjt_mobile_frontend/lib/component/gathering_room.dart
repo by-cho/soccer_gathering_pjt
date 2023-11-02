@@ -3,90 +3,100 @@
 import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/screen/home_screen.dart';
 
-class GatheringRoom extends StatefulWidget {
+class GatheringRoom extends StatelessWidget {
   final List<Room> roomList;
   const GatheringRoom({required this.roomList, Key? key}) : super(key: key);
   @override
-  State<GatheringRoom> createState() => _GatheringRoomState();
-}
-
-class _GatheringRoomState extends State<GatheringRoom> {
-  @override
   Widget build(BuildContext context) {
-    var roomList;
-    return Container(
-      height: 124,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.grey[400]),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 25,
+    return Column(
+      children: roomList
+          .asMap()
+          .entries
+          .map(
+            (e) => Padding(
+              padding: EdgeInsets.only(bottom: e.key == 2 ? 15 : 10.0),
+              child: GestureDetector(
+                onTap: () {
+                  print(e.value.roomInfo);
+                },
+                child: Container(
+                  height: 120,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.grey[200]),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Center(
-                      child: Text(
-                        '첼시',
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
+                          width: 95,
+                          height: 95,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 25,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[300],
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(12, 4, 12, 4),
+                                child: Text(e.value.tag),
+                              ),
+                            ),
+                            Text(
+                              e.value.title,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.place,
+                                  size: 18,
+                                ),
+                                Text(e.value.place),
+                                Text(" ・ "),
+                                Text(e.value.date),
+                                Text(" ・ "),
+                                Text(e.value.time),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.people,
+                                  size: 18,
+                                ),
+                                SizedBox(width: 4),
+                                Text(e.value.peopleNum),
+                                Text('/'),
+                                Text(e.value.maxNum),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Text(
-                  '방제목입니다',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.place,
-                      size: 16,
-                    ),
-                    Text('위치'),
-                    Text(' ・ '),
-                    Text('2023-12-24'),
-                    Text(' ・ '),
-                    Text('오후 12:25'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.people,
-                      size: 16,
-                    ),
-                    Text('12'),
-                    Text('/'),
-                    Text('30'),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }
