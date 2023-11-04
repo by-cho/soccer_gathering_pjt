@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/screen/create_room/create_gather_room.dart';
 
 class RoomCreateButton extends StatefulWidget {
   const RoomCreateButton({super.key});
@@ -10,15 +11,20 @@ class RoomCreateButton extends StatefulWidget {
 class _RoomCreateButtonState extends State<RoomCreateButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 80,
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Colors.green,
+          backgroundColor: Colors.green,
         ),
-        onPressed: () {
+        onPressed: () async {
           print('hi');
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => CreateGatherRoom(),
+            ),
+          );
         },
         child: Row(
           children: [

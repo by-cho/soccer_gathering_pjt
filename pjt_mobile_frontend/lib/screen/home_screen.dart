@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/component/feed.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
 import 'package:pjt_mobile_frontend/component/room_create_button.dart';
 
@@ -28,6 +29,18 @@ class Room {
     required this.time,
     required this.peopleNum,
     required this.maxNum,
+  });
+}
+
+class Feed {
+  String tag;
+  String title;
+  String place;
+
+  Feed({
+    required this.tag,
+    required this.title,
+    required this.place,
   });
 }
 
@@ -64,23 +77,52 @@ class _HomeScreenState extends State<HomeScreen> {
       maxNum: '30',
     ),
   ];
+
+  List<Feed> feedList = [
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다1',
+      place: '마포구',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다2',
+      place: '여의도동',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다3',
+      place: '중구',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다4',
+      place: '중구',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다5',
+      place: '중구',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다6',
+      place: '중구',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다7',
+      place: '중구',
+    ),
+    Feed(
+      tag: '첼시',
+      title: '피드 제목 입니다8',
+      place: '중구',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('LOGO'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications),
-          ),
-        ],
-      ),
       body: SafeArea(
         child: ListView(
           children: [
@@ -102,6 +144,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 10,
                     ),
                     GatheringRoom(roomList: roomList),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text('더보기'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 22,
+                    ),
+                    Text(
+                      '장소 추천',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FeedButton(feedList: feedList),
                     SizedBox(
                       width: double.infinity,
                       height: 40,

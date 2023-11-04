@@ -1,6 +1,5 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/screen/gather_detail.dart';
 import 'package:pjt_mobile_frontend/screen/home_screen.dart';
 
 class GatheringRoom extends StatelessWidget {
@@ -16,8 +15,13 @@ class GatheringRoom extends StatelessWidget {
             (e) => Padding(
               padding: EdgeInsets.only(bottom: e.key == 2 ? 15 : 10.0),
               child: GestureDetector(
-                onTap: () {
-                  print(e.value.roomInfo);
+                onTap: () async {
+                  print(e.value.title);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => GatherDetail(data: e.value),
+                    ),
+                  );
                 },
                 child: Container(
                   height: 120,
