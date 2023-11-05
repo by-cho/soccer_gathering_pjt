@@ -19,6 +19,8 @@ class Room {
   String time;
   String peopleNum;
   String maxNum;
+  String contents;
+  String waysToJoin;
 
   Room({
     required this.roomInfo,
@@ -29,6 +31,8 @@ class Room {
     required this.time,
     required this.peopleNum,
     required this.maxNum,
+    required this.contents,
+    required this.waysToJoin,
   });
 }
 
@@ -55,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
       time: '12:24',
       peopleNum: '12',
       maxNum: '30',
+      contents: '콘텐츠가 들어가는곳입니다. 길게 쓸수 있어요 길게 길게',
+      waysToJoin: '승인제',
     ),
     Room(
       roomInfo: '라리가',
@@ -65,6 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
       time: '12:25',
       peopleNum: '25',
       maxNum: '30',
+      contents:
+          '콘텐츠가 들어가는곳입니다. 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 ',
+      waysToJoin: '선착순',
     ),
     Room(
       roomInfo: '세리에A',
@@ -75,6 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
       time: '12:26',
       peopleNum: '26',
       maxNum: '30',
+      contents:
+          '콘텐츠가 들어가는곳입니다. 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게 길게 쓸수 있어요 길게 길게',
+      waysToJoin: '승인제',
     ),
   ];
 
