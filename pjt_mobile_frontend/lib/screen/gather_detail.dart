@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pjt_mobile_frontend/screen/home_screen.dart';
+import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 
 class GatherDetail extends StatefulWidget {
   final Room data; // Room 데이터를 받아오도록 변경

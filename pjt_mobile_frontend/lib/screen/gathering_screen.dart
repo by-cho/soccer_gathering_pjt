@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/component/gathering_room.dart';
+import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:provider/provider.dart';
 
 class GatheringScreen extends StatefulWidget {
   @override
@@ -33,12 +36,29 @@ class GatheringScreenState extends State<GatheringScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('모임'),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      body: Consumer<DataService>(
+        builder: (context, dataService, child) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  GatheringRoom(roomList: dataService.roomList),
+                ],
+              ),
+            ),
           );
         },
       ),

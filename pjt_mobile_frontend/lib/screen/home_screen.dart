@@ -2,38 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/component/feed.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
 import 'package:pjt_mobile_frontend/component/room_create_button.dart';
+import 'package:pjt_mobile_frontend/screen/gathering_screen.dart';
+import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class Room {
-  String roomInfo;
-  String tag;
-  String title;
-  String place;
-  String date;
-  String time;
-  String peopleNum;
-  String maxNum;
-  String contents;
-  String waysToJoin;
-
-  Room({
-    required this.roomInfo,
-    required this.tag,
-    required this.title,
-    required this.place,
-    required this.date,
-    required this.time,
-    required this.peopleNum,
-    required this.maxNum,
-    required this.contents,
-    required this.waysToJoin,
-  });
 }
 
 class Feed {
@@ -51,7 +27,7 @@ class Feed {
 class _HomeScreenState extends State<HomeScreen> {
   List<Room> roomList = [
     Room(
-      roomInfo: 'PL',
+      roomInfo: 'P L',
       tag: '첼시',
       title: '방 제목 입니다1',
       place: '마포구',
@@ -63,8 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
       waysToJoin: '승인제',
     ),
     Room(
-      roomInfo: '라리가',
-      tag: '첼시',
+      roomInfo: 'P L',
+      tag: '토트넘',
       title: '방 제목 입니다2',
       place: '여의도동',
       date: '2023-12-25',
@@ -77,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Room(
       roomInfo: '세리에A',
-      tag: '첼시',
+      tag: '유벤투스',
       title: '방 제목 입니다3',
       place: '중구',
       date: '2023-12-26',
@@ -140,7 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: double.infinity,
                       height: 40,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => GatheringScreen(),
+                            ),
+                          );
+                        },
                         child: Text('더보기'),
                       ),
                     ),

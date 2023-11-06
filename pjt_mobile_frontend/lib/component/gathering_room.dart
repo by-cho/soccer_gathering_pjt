@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/screen/gather_detail.dart';
-import 'package:pjt_mobile_frontend/screen/home_screen.dart';
+import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 
 class GatheringRoom extends StatelessWidget {
   final List<Room> roomList;
-  const GatheringRoom({required this.roomList, Key? key}) : super(key: key);
+
+  const GatheringRoom({
+    required this.roomList,
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
