@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:provider/provider.dart';
 
 class FeedScreen extends StatefulWidget {
   @override
@@ -33,12 +35,86 @@ class FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('피드'),
+      body: Consumer<DataService>(
+        builder: (context, dataService, child) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView.builder(
+              controller: _scrollController,
+              itemCount: items.length <= dataService.feedList.length
+                  ? items.length
+                  : dataService.feedList.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              dataService.feedList[index].userName,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(dataService.feedList[index].time),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      height: 250,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(dataService.feedList[index].contents),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.favorite_border),
+                        ),
+                        Text(dataService.feedList[index].likeNum),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.comment_outlined),
+                        ),
+                        Text(dataService.feedList[index].replyNum),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                  ],
+                );
+              },
+            ),
           );
         },
       ),

@@ -4,8 +4,19 @@ import 'package:pjt_mobile_frontend/screen/feed_screen.dart';
 import 'package:pjt_mobile_frontend/screen/home_screen.dart';
 import 'package:pjt_mobile_frontend/screen/profile_screen.dart';
 import 'package:pjt_mobile_frontend/screen/search_screen.dart';
+import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DataService()),
+      ],
+      child: MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   @override

@@ -111,26 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
       title: '피드 제목 입니다4',
       place: '중구',
     ),
-    Feed(
-      tag: '첼시',
-      title: '피드 제목 입니다5',
-      place: '중구',
-    ),
-    Feed(
-      tag: '첼시',
-      title: '피드 제목 입니다6',
-      place: '중구',
-    ),
-    Feed(
-      tag: '첼시',
-      title: '피드 제목 입니다7',
-      place: '중구',
-    ),
-    Feed(
-      tag: '첼시',
-      title: '피드 제목 입니다8',
-      place: '중구',
-    ),
   ];
   @override
   Widget build(BuildContext context) {
