@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
+import 'package:pjt_mobile_frontend/component/room_create_button.dart';
 import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,10 @@ class GatheringScreenState extends State<GatheringScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  RoomCreateButton(),
+                  SizedBox(
+                    height: 22,
+                  ),
                   GatheringRoom(roomList: dataService.roomList),
                 ],
               ),
