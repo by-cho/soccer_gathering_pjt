@@ -381,11 +381,105 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                     SizedBox(
                       height: 20,
                     ),
+                    Text(
+                      '모임 일시',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    TextField(
+                      controller: teamInfoController,
+                      decoration: InputDecoration(
+                        labelText: '날짜를 설정하세요',
+                        filled: true, // 입력 상자를 채우도록 설정
+                        fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // 보더 radius 설정
+                          borderSide: BorderSide.none, // 포커스 없을 때 보더 없애기
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // 포커스 시 보더 radius 설정
+                          borderSide: BorderSide.none, // 포커스 시 보더 없애기
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      controller: teamInfoController,
+                      decoration: InputDecoration(
+                        labelText: '시간을 설정하세요',
+                        filled: true, // 입력 상자를 채우도록 설정
+                        fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // 보더 radius 설정
+                          borderSide: BorderSide.none, // 포커스 없을 때 보더 없애기
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(10.0), // 포커스 시 보더 radius 설정
+                          borderSide: BorderSide.none, // 포커스 시 보더 없애기
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      '모임 모집 방법',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 180,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0, // 보더의 두께
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(child: Text('승인제')),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Container(
+                            height: 180,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0, // 보더의 두께
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(child: Text('승인제')),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: saveSearchResult,
-                        child: Text('저장'),
+                        child: Text('미리보기'),
                       ),
                     ),
                     SizedBox(height: 16.0),
