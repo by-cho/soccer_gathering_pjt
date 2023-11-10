@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/screen/create_room/preview_screen.dart';
 
 class CreateGatherRoom extends StatefulWidget {
   @override
@@ -9,7 +10,14 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController teamInfoController = TextEditingController();
   final TextEditingController tagController = TextEditingController();
+  final TextEditingController minNumController = TextEditingController();
+  final TextEditingController maxNumController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController addressDetailController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
+
   String selectedOption = '오프라인'; // 선택된 라디오 버튼의 값을 저장할 변수
 
   List<String> searchResults = [];
@@ -19,7 +27,14 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     titleController.dispose();
     teamInfoController.dispose();
     tagController.dispose();
+    minNumController.dispose();
+    maxNumController.dispose();
     contentController.dispose();
+    addressController.dispose();
+    addressDetailController.dispose();
+    dateController.dispose();
+    timeController.dispose();
+
     super.dispose();
   }
 
@@ -27,13 +42,19 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     String title = titleController.text;
     String teamInfo = teamInfoController.text;
     String tag = tagController.text;
+    String minNum = minNumController.text;
+    String maxNum = maxNumController.text;
     String content = contentController.text;
+    String address = addressController.text;
+    String addressDetail = addressDetailController.text;
+    String date = dateController.text;
+    String time = timeController.text;
     String onAndOffLine = selectedOption;
 
     if (title.isNotEmpty && content.isNotEmpty) {
       // 제목과 내용을 하나의 문자열로 합친다.
       String result =
-          '제목: $title, 응원팀: $teamInfo, 태그: $tag, 내용: $content, 온오프라인: $onAndOffLine';
+          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $address, addressDetail: $addressDetail, ,date: $date, time: $time, onAndOffLine: $onAndOffLine';
       // 데이터를 리스트에 저장
       searchResults.add(result);
 
@@ -41,7 +62,18 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
       titleController.clear();
       teamInfoController.clear();
       tagController.clear();
+      minNumController.clear();
+      maxNumController.clear();
       contentController.clear();
+      addressController.clear();
+      addressDetailController.clear();
+      dateController.clear();
+      timeController.clear();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PreviewScreen(data: searchResults.toString()),
+        ),
+      );
 
       // 저장 후 화면을 업데이트하거나 필요한 작업 수행
       setState(() {});
@@ -139,7 +171,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                       height: 15,
                     ),
                     TextField(
-                      controller: teamInfoController,
+                      controller: tagController,
                       decoration: InputDecoration(
                         labelText: '태그를 설정하세요',
                         filled: true, // 입력 상자를 채우도록 설정
@@ -202,7 +234,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                       children: [
                         Expanded(
                           child: TextField(
-                            controller: teamInfoController,
+                            controller: minNumController,
                             decoration: InputDecoration(
                               labelText: '최소 인원 2명',
                               filled: true, // 입력 상자를 채우도록 설정
@@ -226,7 +258,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                         ),
                         Expanded(
                           child: TextField(
-                            controller: teamInfoController,
+                            controller: maxNumController,
                             decoration: InputDecoration(
                               filled: true, // 입력 상자를 채우도록 설정
                               fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
@@ -313,7 +345,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                                 children: [
                                   Expanded(
                                     child: TextField(
-                                      controller: contentController,
+                                      controller: addressController,
                                       decoration: InputDecoration(
                                         label: Text('주소를 입력하세요'),
                                         filled: true, // 입력 상자를 채우도록 설정
@@ -354,7 +386,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                                 height: 10,
                               ),
                               TextField(
-                                controller: contentController,
+                                controller: addressDetailController,
                                 decoration: InputDecoration(
                                   label: Text('상세 주소를 입력하세요'),
                                   filled: true, // 입력 상자를 채우도록 설정
@@ -390,7 +422,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                       height: 15,
                     ),
                     TextField(
-                      controller: teamInfoController,
+                      controller: dateController,
                       decoration: InputDecoration(
                         labelText: '날짜를 설정하세요',
                         filled: true, // 입력 상자를 채우도록 설정
@@ -411,7 +443,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                       height: 10,
                     ),
                     TextField(
-                      controller: teamInfoController,
+                      controller: timeController,
                       decoration: InputDecoration(
                         labelText: '시간을 설정하세요',
                         filled: true, // 입력 상자를 채우도록 설정
