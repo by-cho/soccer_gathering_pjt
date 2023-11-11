@@ -54,21 +54,21 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     if (title.isNotEmpty && content.isNotEmpty) {
       // 제목과 내용을 하나의 문자열로 합친다.
       String result =
-          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $address, addressDetail: $addressDetail, ,date: $date, time: $time, onAndOffLine: $onAndOffLine';
+          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $address, addressDetail: $addressDetail, date: $date, time: $time, onAndOffLine: $onAndOffLine';
       // 데이터를 리스트에 저장
       searchResults.add(result);
 
       // 입력 필드 초기화
-      titleController.clear();
-      teamInfoController.clear();
-      tagController.clear();
-      minNumController.clear();
-      maxNumController.clear();
-      contentController.clear();
-      addressController.clear();
-      addressDetailController.clear();
-      dateController.clear();
-      timeController.clear();
+      // titleController.clear();
+      // teamInfoController.clear();
+      // tagController.clear();
+      // minNumController.clear();
+      // maxNumController.clear();
+      // contentController.clear();
+      // addressController.clear();
+      // addressDetailController.clear();
+      // dateController.clear();
+      // timeController.clear();
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => PreviewScreen(data: searchResults.toString()),

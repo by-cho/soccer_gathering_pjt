@@ -3,13 +3,40 @@ import 'package:flutter/material.dart';
 class PreviewScreen extends StatefulWidget {
   final String data; // Room 데이터를 받아오도록 변경
 
-  PreviewScreen({super.key, required this.data});
+  PreviewScreen({Key? key, required this.data}) : super(key: key);
 
   @override
   State<PreviewScreen> createState() => _PreviewScreenState();
 }
 
 class _PreviewScreenState extends State<PreviewScreen> {
+  Map<String, dynamic> dataMap = {};
+
+  @override
+  void initState() {
+    super.initState();
+    dataMap = parseDataMap(widget.data);
+  }
+
+  Map<String, dynamic> parseDataMap(String data) {
+    Map<String, dynamic> result = {};
+
+    // "[title: 제목, minNum: 23, maxNum: 40]" 형태의 문자열을 파싱
+    String cleanedData =
+        data.substring(1, data.length - 1); // "[...]" 형태에서 대괄호 제거
+    List<String> keyValuePairs = cleanedData.split(', '); // 쉼표와 공백으로 분리
+
+    for (String pair in keyValuePairs) {
+      // ':'로 분리하여 키와 값을 추출
+      List<String> keyValue = pair.split(':');
+      String key = keyValue[0].trim();
+      String value = keyValue[1].trim();
+      result[key] = value;
+    }
+
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,22 +74,22 @@ class _PreviewScreenState extends State<PreviewScreen> {
                       child: Padding(
                         padding:
                             const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
-                        child: Text(widget.data),
+                        child: Text(dataMap['tag']),
                       ),
                     ),
                     SizedBox(
                       height: 12,
                     ),
                     Text(
-                      widget.data,
+                      dataMap['title'],
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
                       height: 12,
                     ),
-                    Text('날짜: ${widget.data}'),
-                    Text('시간: ${widget.data}'),
+                    Text('날짜: ${dataMap['date']}'),
+                    Text('시간: ${dataMap['time']}'),
                   ],
                 ),
               ),
@@ -87,7 +114,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(widget.data),
+                    Text('${dataMap['content']}'),
+                    Text(dataMap.toString()),
                     SizedBox(
                       height: 20,
                     ),
@@ -112,7 +140,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('장소'),
                                 width: 80,
                               ),
-                              Text(widget.data),
+                              Text('${dataMap['address']}'),
                             ],
                           ),
                           Row(
@@ -121,7 +149,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('일시'),
                                 width: 80,
                               ),
-                              Text(widget.data),
+                              Text('${dataMap['time']}'),
                             ],
                           ),
                           Row(
@@ -130,7 +158,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('참여 유형'),
                                 width: 80,
                               ),
-                              Text(widget.data),
+                              Text('${dataMap['onAndOffLine']}'),
                             ],
                           ),
                           Row(
@@ -139,7 +167,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('참여 인원'),
                                 width: 80,
                               ),
-                              Text('${widget.data} / ${widget.data}')
+                              Text(
+                                  '${dataMap['minNum']} / ${dataMap['maxNum']}')
                             ],
                           ),
                         ],
