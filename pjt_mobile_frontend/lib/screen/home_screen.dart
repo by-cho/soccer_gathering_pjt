@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/component/feed.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
 import 'package:pjt_mobile_frontend/component/room_create_button.dart';
+import 'package:pjt_mobile_frontend/screen/feed/recommend_place_screen.dart';
 import 'package:pjt_mobile_frontend/screen/gathering_screen.dart';
 import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 
@@ -141,7 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: double.infinity,
                       height: 40,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => RecommendPlaceScreen(),
+                            ),
+                          );
+                        },
                         child: Text('더보기'),
                       ),
                     ),

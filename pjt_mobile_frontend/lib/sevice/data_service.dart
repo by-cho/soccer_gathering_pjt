@@ -52,6 +52,32 @@ class Feed {
   });
 }
 
+class RCPlace {
+  String tag;
+  String title;
+  String place;
+  String time;
+  String userName;
+  String profilePic;
+  String date;
+  String likeNum;
+  String replyNum;
+  String contents;
+
+  RCPlace({
+    required this.tag,
+    required this.title,
+    required this.place,
+    required this.time,
+    required this.userName,
+    required this.profilePic,
+    required this.date,
+    required this.likeNum,
+    required this.replyNum,
+    required this.contents,
+  });
+}
+
 class DataService extends ChangeNotifier {
   List<Room> roomList = [
     Room(
@@ -910,6 +936,105 @@ class DataService extends ChangeNotifier {
       place: '중구',
       time: '11:30',
       userName: 'user30',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+  ];
+
+  List<RCPlace> rcPlaceList = [
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다22',
+      place: '여의도동',
+      time: '11:30',
+      userName: 'user22',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다23',
+      place: '중구',
+      time: '11:30',
+      userName: 'user23',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다24',
+      place: '중구',
+      time: '11:30',
+      userName: 'user24',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다25',
+      place: '중구',
+      time: '11:30',
+      userName: 'user25',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다26',
+      place: '중구',
+      time: '11:30',
+      userName: 'user26',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다27',
+      place: '중구',
+      time: '11:30',
+      userName: 'user27',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다28',
+      place: '중구',
+      time: '11:30',
+      userName: 'user28',
+      profilePic: 'link',
+      date: '2023-12-24',
+      likeNum: '12',
+      replyNum: '25',
+      contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
+    ),
+    RCPlace(
+      tag: '첼시',
+      title: '피드 제목 입니다29',
+      place: '중구',
+      time: '11:30',
+      userName: 'user29',
       profilePic: 'link',
       date: '2023-12-24',
       likeNum: '12',
