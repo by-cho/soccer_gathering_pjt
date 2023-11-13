@@ -25,29 +25,35 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-              color: Colors.white,
-              fontFamily: 'bungeeshade',
-              fontSize: 80,
-              fontWeight: FontWeight.w700),
+            color: Colors.white,
+            fontFamily: 'bungeeshade',
+            fontSize: _calculateFontSize(context, 0.15), // 여기에 폰트 크기 비율을 넣습니다.
+            fontWeight: FontWeight.w700,
+          ),
           headline2: TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: _calculateFontSize(context, 0.05), // 여기에 폰트 크기 비율을 넣습니다.
             fontWeight: FontWeight.w600,
           ),
           bodyText1: TextStyle(
             color: Colors.black,
-            fontSize: 14,
+            fontSize: _calculateFontSize(context, 0.037), // 여기에 폰트 크기 비율을 넣습니다.
           ),
           bodyText2: TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: _calculateFontSize(context, 0.036), // 여기에 폰트 크기 비율을 넣습니다.
           ),
         ),
       ),
       home: MyBottomNavigationBar(),
     );
+  }
+
+  double _calculateFontSize(BuildContext context, double scaleFactor) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return screenWidth * scaleFactor;
   }
 }
 
@@ -70,7 +76,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LOGO'),
+        title: Text('WHISTLE'),
         backgroundColor: APP_BAR_COLOR,
         actions: [
           IconButton(
@@ -97,11 +103,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         backgroundColor: APP_BAR_COLOR,
         unselectedItemColor: DARKGREY,
         selectedItemColor: Colors.white,
-        type: BottomNavigationBarType.fixed, // 모든 항목의 label을 표시
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
-            if (isLogin == false && index == 2 || index == 3) {
+            if (isLogin == false && (index == 2 || index == 3)) {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => LoginScreen(),

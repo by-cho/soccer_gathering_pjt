@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 import 'package:pjt_mobile_frontend/screen/create_room/preview_screen.dart';
 
 class CreateGatherRoom extends StatefulWidget {
@@ -17,7 +18,10 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
   final TextEditingController addressDetailController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
-
+  bool _isMinNumeric = true;
+  bool _isMaxNumeric = true;
+  bool _showMinError = false;
+  bool _showMaxError = false;
   String selectedOption = '오프라인'; // 선택된 라디오 버튼의 값을 저장할 변수
 
   List<String> searchResults = [];
@@ -35,6 +39,10 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     dateController.dispose();
     timeController.dispose();
 
+    minNumController.removeListener(_checkNumericInput);
+    minNumController.dispose();
+    maxNumController.removeListener(_checkNumericInput);
+    maxNumController.dispose();
     super.dispose();
   }
 
@@ -80,20 +88,36 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     }
   }
 
+  void initState() {
+    super.initState();
+    minNumController.addListener(_checkNumericInput);
+    maxNumController.addListener(_checkNumericInput);
+  }
+
+  void _checkNumericInput() {
+    setState(() {
+      _isMinNumeric = double.tryParse(minNumController.text) != null;
+      _isMaxNumeric = double.tryParse(maxNumController.text) != null;
+      _showMinError = minNumController.text.isNotEmpty && !_isMinNumeric;
+      _showMaxError = maxNumController.text.isNotEmpty && !_isMaxNumeric;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: APP_BAR_COLOR,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
           ),
         ),
       ),
+      backgroundColor: BACKGROUND_COLOR,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -231,12 +255,18 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                       height: 15,
                     ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: TextField(
                             controller: minNumController,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               labelText: '최소 인원 2명',
+                              errorText: _showMinError
+                                  ? '숫자만 입력해야 합니다'
+                                  : null, // _showError 값을 사용하여 에러 텍스트 표시 여부 결정
+
                               filled: true, // 입력 상자를 채우도록 설정
                               fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
                               border: OutlineInputBorder(
@@ -252,14 +282,21 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                             ),
                           ),
                         ),
-                        Text(
-                          '  -  ',
-                          style: TextStyle(fontSize: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Text(
+                            '  -  ',
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
                         Expanded(
                           child: TextField(
                             controller: maxNumController,
                             decoration: InputDecoration(
+                              errorText: _showMaxError
+                                  ? '숫자만 입력해야 합니다'
+                                  : null, // _showError 값을 사용하여 에러 텍스트 표시 여부 결정
+
                               filled: true, // 입력 상자를 채우도록 설정
                               fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
                               border: OutlineInputBorder(
@@ -319,6 +356,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                         Radio<String>(
                           value: '오프라인',
                           groupValue: selectedOption,
+                          activeColor: Colors.white,
                           onChanged: (value) {
                             setState(() {
                               selectedOption = value!;
@@ -328,6 +366,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                         Text('오프라인'),
                         Radio<String>(
                           value: '온라인',
+                          activeColor: Colors.white,
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
@@ -374,6 +413,9 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                                     height: 58,
                                     child: ElevatedButton(
                                       onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        primary: BUTTON_COLOR, // 변경할 색상을 여기에 설정
+                                      ),
                                       child: Text(
                                         '검색',
                                         style: TextStyle(fontSize: 16),
@@ -499,7 +541,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Center(child: Text('승인제')),
+                            child: Center(child: Text('선착순')),
                           ),
                         ),
                       ],
@@ -509,8 +551,12 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                     ),
                     Container(
                       width: double.infinity,
+                      height: 50,
                       child: ElevatedButton(
                         onPressed: saveSearchResult,
+                        style: ElevatedButton.styleFrom(
+                          primary: BUTTON_COLOR, // 변경할 색상을 여기에 설정
+                        ),
                         child: Text('미리보기'),
                       ),
                     ),

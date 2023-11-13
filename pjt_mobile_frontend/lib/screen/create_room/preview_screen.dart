@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 
 class PreviewScreen extends StatefulWidget {
   final String data; // Room 데이터를 받아오도록 변경
@@ -41,17 +42,17 @@ class _PreviewScreenState extends State<PreviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: APP_BAR_COLOR,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
           ),
         ),
       ),
+      backgroundColor: BACKGROUND_COLOR,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -96,7 +97,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
               Container(
                 height: 8,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: DARKGREY,
                 ),
               ),
               Padding(
@@ -182,6 +183,10 @@ class _PreviewScreenState extends State<PreviewScreen> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          primary: BUTTON_COLOR, // 버튼 배경색 변경
+                          onPrimary: Colors.white, // 텍스트 색 변경
+                        ),
                         child: Text(
                           '모임 참가 신청하기',
                           style: TextStyle(fontSize: 16),

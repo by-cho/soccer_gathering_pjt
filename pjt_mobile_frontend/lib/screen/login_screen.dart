@@ -10,10 +10,28 @@ class LoginScreen extends StatelessWidget {
     final textTheme = theme.textTheme;
     return Scaffold(
       backgroundColor: BACKGROUND_COLOR,
-      body: Center(
-        child: Text(
-          'WHISTLE',
-          style: textTheme.headline1,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'WHISTLE',
+              style: textTheme.headline1,
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('로그인'),
+              ),
+            )
+          ],
         ),
       ),
     );
