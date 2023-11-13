@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 import 'package:pjt_mobile_frontend/screen/chat_screen.dart';
 import 'package:pjt_mobile_frontend/screen/feed_screen.dart';
 import 'package:pjt_mobile_frontend/screen/home_screen.dart';
@@ -23,6 +24,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          headline1: TextStyle(
+              color: Colors.white,
+              fontFamily: 'bungeeshade',
+              fontSize: 80,
+              fontWeight: FontWeight.w700),
+          headline2: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+          bodyText1: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
+          ),
+          bodyText2: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+          ),
+        ),
+      ),
       home: MyBottomNavigationBar(),
     );
   }
@@ -47,8 +70,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
         title: Text('LOGO'),
+        backgroundColor: APP_BAR_COLOR,
         actions: [
           IconButton(
             onPressed: () {
@@ -66,9 +89,14 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           ),
         ],
       ),
-      body: _screens[_currentIndex],
+      body: Container(
+        decoration: BoxDecoration(color: BACKGROUND_COLOR),
+        child: _screens[_currentIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
+        backgroundColor: APP_BAR_COLOR,
+        unselectedItemColor: DARKGREY,
+        selectedItemColor: Colors.white,
         type: BottomNavigationBarType.fixed, // 모든 항목의 label을 표시
         currentIndex: _currentIndex,
         onTap: (int index) {

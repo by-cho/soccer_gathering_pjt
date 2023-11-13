@@ -11,6 +11,8 @@ class GatheringRoom extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return Column(
       children: roomList
           .asMap()
@@ -60,15 +62,15 @@ class GatheringRoom extends StatelessWidget {
                               child: Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(12, 4, 12, 4),
-                                child: Text(e.value.tag),
+                                child: Text(
+                                  e.value.tag,
+                                  style: textTheme.bodyText2,
+                                ),
                               ),
                             ),
                             Text(
                               e.value.title,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: textTheme.bodyText1,
                             ),
                             Row(
                               children: [
@@ -76,11 +78,26 @@ class GatheringRoom extends StatelessWidget {
                                   Icons.place,
                                   size: 18,
                                 ),
-                                Text(e.value.place),
-                                Text(" ・ "),
-                                Text(e.value.date),
-                                Text(" ・ "),
-                                Text(e.value.time),
+                                Text(
+                                  e.value.place,
+                                  style: textTheme.bodyText1,
+                                ),
+                                Text(
+                                  " ・ ",
+                                  style: textTheme.bodyText1,
+                                ),
+                                Text(
+                                  e.value.date,
+                                  style: textTheme.bodyText1,
+                                ),
+                                Text(
+                                  " ・ ",
+                                  style: textTheme.bodyText1,
+                                ),
+                                Text(
+                                  e.value.time,
+                                  style: textTheme.bodyText1,
+                                ),
                               ],
                             ),
                             Row(
@@ -90,9 +107,18 @@ class GatheringRoom extends StatelessWidget {
                                   size: 18,
                                 ),
                                 SizedBox(width: 4),
-                                Text(e.value.peopleNum),
-                                Text('/'),
-                                Text(e.value.maxNum),
+                                Text(
+                                  e.value.peopleNum,
+                                  style: textTheme.bodyText1,
+                                ),
+                                Text(
+                                  '/',
+                                  style: textTheme.bodyText1,
+                                ),
+                                Text(
+                                  e.value.maxNum,
+                                  style: textTheme.bodyText1,
+                                ),
                               ],
                             ),
                           ],

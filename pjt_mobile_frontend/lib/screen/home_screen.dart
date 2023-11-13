@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/main.dart';
 import 'package:pjt_mobile_frontend/component/feed.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
 import 'package:pjt_mobile_frontend/component/room_create_button.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 import 'package:pjt_mobile_frontend/screen/feed/recommend_place_screen.dart';
 import 'package:pjt_mobile_frontend/screen/gathering_screen.dart';
 import 'package:pjt_mobile_frontend/sevice/data_service.dart';
@@ -91,7 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return Scaffold(
+      backgroundColor: BACKGROUND_COLOR,
       body: SafeArea(
         child: ListView(
           children: [
@@ -107,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Text(
                       '응원방 추천',
-                      style: TextStyle(fontSize: 18),
+                      style: textTheme.headline2,
                     ),
                     SizedBox(
                       height: 10,
@@ -117,6 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: double.infinity,
                       height: 40,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: BUTTON_COLOR, // 버튼 배경색 변경
+                          onPrimary: Colors.white, // 텍스트 색 변경
+                        ),
                         onPressed: () async {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -132,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Text(
                       '장소 추천',
-                      style: TextStyle(fontSize: 18),
+                      style: textTheme.headline2,
                     ),
                     SizedBox(
                       height: 10,
@@ -142,6 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: double.infinity,
                       height: 40,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: BUTTON_COLOR, // 버튼 배경색 변경
+                          onPrimary: Colors.white, // 텍스트 색 변경
+                        ),
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(

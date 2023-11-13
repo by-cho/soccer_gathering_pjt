@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 import 'package:pjt_mobile_frontend/screen/create_room/create_gather_room.dart';
 
 class RoomCreateButton extends StatefulWidget {
@@ -16,7 +17,7 @@ class _RoomCreateButtonState extends State<RoomCreateButton> {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green,
+          backgroundColor: BUTTON_COLOR,
         ),
         onPressed: () async {
           print('hi');

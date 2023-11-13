@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 import 'package:provider/provider.dart';
 
@@ -35,6 +36,7 @@ class FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BACKGROUND_COLOR,
       body: Consumer<DataService>(
         builder: (context, dataService, child) {
           return Padding(
@@ -95,7 +97,10 @@ class FeedScreenState extends State<FeedScreen> {
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.favorite_border),
+                          icon: Icon(
+                            Icons.favorite_border,
+                            color: Colors.white,
+                          ),
                         ),
                         Text(dataService.feedList[index].likeNum),
                         SizedBox(
@@ -103,7 +108,10 @@ class FeedScreenState extends State<FeedScreen> {
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.comment_outlined),
+                          icon: Icon(
+                            Icons.comment_outlined,
+                            color: Colors.white,
+                          ),
                         ),
                         Text(dataService.feedList[index].replyNum),
                       ],

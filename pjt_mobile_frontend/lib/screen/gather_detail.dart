@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
 import 'package:pjt_mobile_frontend/sevice/data_service.dart';
 
 class GatherDetail extends StatefulWidget {
@@ -15,17 +16,17 @@ class _GatherDetailState extends State<GatherDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: APP_BAR_COLOR,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
           ),
         ),
       ),
+      backgroundColor: BACKGROUND_COLOR,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -70,7 +71,7 @@ class _GatherDetailState extends State<GatherDetail> {
               Container(
                 height: 8,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: DARKGREY,
                 ),
               ),
               Padding(
