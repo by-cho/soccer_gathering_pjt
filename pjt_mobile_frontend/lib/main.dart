@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/screen/chat_screen.dart';
 import 'package:pjt_mobile_frontend/screen/feed_screen.dart';
 import 'package:pjt_mobile_frontend/screen/home_screen.dart';
+import 'package:pjt_mobile_frontend/screen/login_screen.dart';
 import 'package:pjt_mobile_frontend/screen/profile_screen.dart';
 import 'package:pjt_mobile_frontend/screen/search_screen.dart';
 import 'package:pjt_mobile_frontend/sevice/data_service.dart';
@@ -33,6 +34,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 }
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
+  final isLogin = false;
   int _currentIndex = 0;
   final List<Widget> _screens = [
     HomeScreen(),
@@ -71,6 +73,13 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
+            if (isLogin == false && index == 2 || index == 3) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ),
+              );
+            }
             _currentIndex = index;
           });
         },
