@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:pjt_mobile_frontend/constant/color.dart';
+import 'package:pjt_mobile_frontend/screen/create_room/daum_postcod_widget.dart';
 import 'package:pjt_mobile_frontend/screen/create_room/preview_screen.dart';
 
 class CreateGatherRoom extends StatefulWidget {
@@ -23,9 +26,13 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
   bool _showMinError = false;
   bool _showMaxError = false;
   String selectedOption = '오프라인'; // 선택된 라디오 버튼의 값을 저장할 변수
-
   List<String> searchResults = [];
-
+  String addressJSON = '';
+  DateTime selectedDate = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
   @override
   void dispose() {
     titleController.dispose();
@@ -62,7 +69,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     if (title.isNotEmpty && content.isNotEmpty) {
       // 제목과 내용을 하나의 문자열로 합친다.
       String result =
-          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $address, addressDetail: $addressDetail, date: $date, time: $time, onAndOffLine: $onAndOffLine';
+          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $addressJSON, addressDetail: $addressDetail, date: $date, time: $time, onAndOffLine: $onAndOffLine';
       // 데이터를 리스트에 저장
       searchResults.add(result);
 
@@ -88,6 +95,38 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     }
   }
 
+  void onHeartPressed() {
+    //dialog
+    showCupertinoDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            color: Colors.white,
+            height: 300.0,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              initialDateTime: selectedDate,
+              minimumDate: DateTime(
+                DateTime.now().year,
+                DateTime.now().month,
+                DateTime.now().day,
+              ),
+              onDateTimeChanged: (DateTime date) {
+                setState(() {
+                  selectedDate = date;
+                });
+                ;
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void initState() {
     super.initState();
     minNumController.addListener(_checkNumericInput);
@@ -105,6 +144,8 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: APP_BAR_COLOR,
@@ -386,7 +427,11 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                                     child: TextField(
                                       controller: addressController,
                                       decoration: InputDecoration(
-                                        label: Text('주소를 입력하세요'),
+                                        label: Text(
+                                          addressJSON.isEmpty
+                                              ? '주소를 입력하세요'
+                                              : addressJSON,
+                                        ),
                                         filled: true, // 입력 상자를 채우도록 설정
                                         fillColor:
                                             Colors.grey[200], // 입력 상자의 배경 색상 설정
@@ -412,7 +457,18 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                                     width: 65,
                                     height: 58,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        KopoModel model = await Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                            builder: (context) => RemediKopo(),
+                                          ),
+                                        );
+                                        print(model.toJson());
+                                        setState(() {
+                                          addressJSON = '${model.address}';
+                                        });
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         primary: BUTTON_COLOR, // 변경할 색상을 여기에 설정
                                       ),
@@ -463,21 +519,21 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                     SizedBox(
                       height: 15,
                     ),
-                    TextField(
-                      controller: dateController,
-                      decoration: InputDecoration(
-                        labelText: '날짜를 설정하세요',
-                        filled: true, // 입력 상자를 채우도록 설정
-                        fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
-                        border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // 보더 radius 설정
-                          borderSide: BorderSide.none, // 포커스 없을 때 보더 없애기
+                    GestureDetector(
+                      onTap: onHeartPressed,
+                      child: Container(
+                        height: 60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // 포커스 시 보더 radius 설정
-                          borderSide: BorderSide.none, // 포커스 시 보더 없애기
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
+                          child: Text(
+                            '${selectedDate.year}년 ${selectedDate.month}월 ${selectedDate.day}일',
+                            style: textTheme.bodyText1,
+                          ),
                         ),
                       ),
                     ),
