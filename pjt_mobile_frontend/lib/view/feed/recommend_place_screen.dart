@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/constant/color.dart';
-import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:pjt_mobile_frontend/view_model/data_service.dart';
 import 'package:provider/provider.dart';
 
-class FeedScreen extends StatefulWidget {
+class RecommendPlaceScreen extends StatefulWidget {
   @override
-  FeedScreenState createState() => FeedScreenState();
+  RecommendPlaceScreenState createState() => RecommendPlaceScreenState();
 }
 
-class FeedScreenState extends State<FeedScreen> {
+class RecommendPlaceScreenState extends State<RecommendPlaceScreen> {
   final ScrollController _scrollController = ScrollController();
   List<String> items = List.generate(20, (index) => 'Item $index');
 
@@ -43,9 +43,9 @@ class FeedScreenState extends State<FeedScreen> {
             padding: const EdgeInsets.all(16.0),
             child: ListView.builder(
               controller: _scrollController,
-              itemCount: items.length <= dataService.feedList.length
+              itemCount: items.length <= dataService.RecommendPlaceList.length
                   ? items.length
-                  : dataService.feedList.length,
+                  : dataService.RecommendPlaceList.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
@@ -66,7 +66,7 @@ class FeedScreenState extends State<FeedScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              dataService.feedList[index].userName,
+                              dataService.RecommendPlaceList[index].userName,
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
@@ -75,7 +75,7 @@ class FeedScreenState extends State<FeedScreen> {
                             SizedBox(
                               height: 8,
                             ),
-                            Text(dataService.feedList[index].time),
+                            Text(dataService.RecommendPlaceList[index].time),
                           ],
                         ),
                       ],
@@ -92,28 +92,22 @@ class FeedScreenState extends State<FeedScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(dataService.feedList[index].contents),
+                    Text(dataService.RecommendPlaceList[index].contents),
                     Row(
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                          ),
+                          icon: Icon(Icons.favorite_border),
                         ),
-                        Text(dataService.feedList[index].likeNum),
+                        Text(dataService.RecommendPlaceList[index].likeNum),
                         SizedBox(
                           width: 4,
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(
-                            Icons.comment_outlined,
-                            color: Colors.white,
-                          ),
+                          icon: Icon(Icons.comment_outlined),
                         ),
-                        Text(dataService.feedList[index].replyNum),
+                        Text(dataService.RecommendPlaceList[index].replyNum),
                       ],
                     ),
                     SizedBox(

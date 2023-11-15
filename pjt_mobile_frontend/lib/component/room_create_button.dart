@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/constant/color.dart';
-import 'package:pjt_mobile_frontend/screen/create_room/create_gather_room.dart';
+import 'package:pjt_mobile_frontend/view/create_room/create_gather_room.dart';
 
 class RoomCreateButton extends StatefulWidget {
   const RoomCreateButton({super.key});
@@ -20,7 +20,6 @@ class _RoomCreateButtonState extends State<RoomCreateButton> {
           backgroundColor: BUTTON_COLOR,
         ),
         onPressed: () async {
-          print('hi');
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => CreateGatherRoom(),

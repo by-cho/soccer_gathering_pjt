@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:pjt_mobile_frontend/constant/color.dart';
+import 'package:pjt_mobile_frontend/view_model/data_service.dart';
 import 'package:provider/provider.dart';
 
-class RecommendPlaceScreen extends StatefulWidget {
+class FeedScreen extends StatefulWidget {
   @override
-  RecommendPlaceScreenState createState() => RecommendPlaceScreenState();
+  FeedScreenState createState() => FeedScreenState();
 }
 
-class RecommendPlaceScreenState extends State<RecommendPlaceScreen> {
+class FeedScreenState extends State<FeedScreen> {
   final ScrollController _scrollController = ScrollController();
   List<String> items = List.generate(20, (index) => 'Item $index');
 
@@ -35,15 +36,16 @@ class RecommendPlaceScreenState extends State<RecommendPlaceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: BACKGROUND_COLOR,
       body: Consumer<DataService>(
         builder: (context, dataService, child) {
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView.builder(
               controller: _scrollController,
-              itemCount: items.length <= dataService.rcPlaceList.length
+              itemCount: items.length <= dataService.feedList.length
                   ? items.length
-                  : dataService.rcPlaceList.length,
+                  : dataService.feedList.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
@@ -64,7 +66,7 @@ class RecommendPlaceScreenState extends State<RecommendPlaceScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              dataService.rcPlaceList[index].userName,
+                              dataService.feedList[index].userName,
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
@@ -73,7 +75,7 @@ class RecommendPlaceScreenState extends State<RecommendPlaceScreen> {
                             SizedBox(
                               height: 8,
                             ),
-                            Text(dataService.rcPlaceList[index].time),
+                            Text(dataService.feedList[index].time),
                           ],
                         ),
                       ],
@@ -90,22 +92,28 @@ class RecommendPlaceScreenState extends State<RecommendPlaceScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(dataService.rcPlaceList[index].contents),
+                    Text(dataService.feedList[index].contents),
                     Row(
                       children: [
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.favorite_border),
+                          icon: Icon(
+                            Icons.favorite_border,
+                            color: Colors.white,
+                          ),
                         ),
-                        Text(dataService.rcPlaceList[index].likeNum),
+                        Text(dataService.feedList[index].likeNum),
                         SizedBox(
                           width: 4,
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.comment_outlined),
+                          icon: Icon(
+                            Icons.comment_outlined,
+                            color: Colors.white,
+                          ),
                         ),
-                        Text(dataService.rcPlaceList[index].replyNum),
+                        Text(dataService.feedList[index].replyNum),
                       ],
                     ),
                     SizedBox(

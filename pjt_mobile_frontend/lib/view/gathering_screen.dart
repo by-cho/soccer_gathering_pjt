@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
 import 'package:pjt_mobile_frontend/component/room_create_button.dart';
 import 'package:pjt_mobile_frontend/constant/color.dart';
-import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:pjt_mobile_frontend/view_model/data_service.dart';
 import 'package:provider/provider.dart';
 
 class GatheringScreen extends StatefulWidget {

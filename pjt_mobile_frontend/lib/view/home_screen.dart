@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pjt_mobile_frontend/main.dart';
 import 'package:pjt_mobile_frontend/component/feed.dart';
 import 'package:pjt_mobile_frontend/component/gathering_room.dart';
 import 'package:pjt_mobile_frontend/component/room_create_button.dart';
 import 'package:pjt_mobile_frontend/constant/color.dart';
-import 'package:pjt_mobile_frontend/screen/feed/recommend_place_screen.dart';
-import 'package:pjt_mobile_frontend/screen/gathering_screen.dart';
-import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:pjt_mobile_frontend/view/feed/recommend_place_screen.dart';
+import 'package:pjt_mobile_frontend/view/gathering_screen.dart';
+
+import '../model/room_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

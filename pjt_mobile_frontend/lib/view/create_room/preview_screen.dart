@@ -141,7 +141,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('장소'),
                                 width: 80,
                               ),
-                              Text('${dataMap['address']}'),
+                              Text(
+                                  '${dataMap['address']} ${dataMap['addressDetail']}'),
                             ],
                           ),
                           Row(

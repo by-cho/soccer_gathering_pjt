@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pjt_mobile_frontend/screen/gather_detail.dart';
-import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:pjt_mobile_frontend/view/gather_detail.dart';
+
+import '../model/room_model.dart';
 
 class GatheringRoom extends StatelessWidget {
   final List<Room> roomList;
@@ -22,7 +23,6 @@ class GatheringRoom extends StatelessWidget {
               padding: EdgeInsets.only(bottom: e.key == 2 ? 15 : 10.0),
               child: GestureDetector(
                 onTap: () async {
-                  print(e.value.title);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => GatherDetail(data: e.value),

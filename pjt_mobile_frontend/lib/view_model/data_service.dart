@@ -1,82 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Room {
-  String roomInfo;
-  String tag;
-  String title;
-  String place;
-  String date;
-  String time;
-  String peopleNum;
-  String maxNum;
-  String contents;
-  String waysToJoin;
-
-  Room({
-    required this.roomInfo,
-    required this.tag,
-    required this.title,
-    required this.place,
-    required this.date,
-    required this.time,
-    required this.peopleNum,
-    required this.maxNum,
-    required this.contents,
-    required this.waysToJoin,
-  });
-}
-
-class Feed {
-  String tag;
-  String title;
-  String place;
-  String time;
-  String userName;
-  String profilePic;
-  String date;
-  String likeNum;
-  String replyNum;
-  String contents;
-
-  Feed({
-    required this.tag,
-    required this.title,
-    required this.place,
-    required this.time,
-    required this.userName,
-    required this.profilePic,
-    required this.date,
-    required this.likeNum,
-    required this.replyNum,
-    required this.contents,
-  });
-}
-
-class RCPlace {
-  String tag;
-  String title;
-  String place;
-  String time;
-  String userName;
-  String profilePic;
-  String date;
-  String likeNum;
-  String replyNum;
-  String contents;
-
-  RCPlace({
-    required this.tag,
-    required this.title,
-    required this.place,
-    required this.time,
-    required this.userName,
-    required this.profilePic,
-    required this.date,
-    required this.likeNum,
-    required this.replyNum,
-    required this.contents,
-  });
-}
+import '../model/feed_model.dart';
+import '../model/room_model.dart';
+import '../model/recommend_place_model.dart';
 
 class DataService extends ChangeNotifier {
   List<Room> roomList = [
@@ -944,8 +870,8 @@ class DataService extends ChangeNotifier {
     ),
   ];
 
-  List<RCPlace> rcPlaceList = [
-    RCPlace(
+  List<RecommendPlace> RecommendPlaceList = [
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다22',
       place: '여의도동',
@@ -957,7 +883,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다23',
       place: '중구',
@@ -969,7 +895,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다24',
       place: '중구',
@@ -981,7 +907,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다25',
       place: '중구',
@@ -993,7 +919,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다26',
       place: '중구',
@@ -1005,7 +931,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다27',
       place: '중구',
@@ -1017,7 +943,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다28',
       place: '중구',
@@ -1029,7 +955,7 @@ class DataService extends ChangeNotifier {
       replyNum: '25',
       contents: '코멘트가 들어갈 자리입니다. 길게도 쓸수 있는데 더보기 필요함',
     ),
-    RCPlace(
+    RecommendPlace(
       tag: '첼시',
       title: '피드 제목 입니다29',
       place: '중구',

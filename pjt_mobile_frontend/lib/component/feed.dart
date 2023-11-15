@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pjt_mobile_frontend/screen/home_screen.dart';
+import 'package:pjt_mobile_frontend/view/home_screen.dart';
 
 class FeedButton extends StatelessWidget {
   final List<Feed> feedList;

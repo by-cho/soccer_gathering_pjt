@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pjt_mobile_frontend/constant/color.dart';
-import 'package:pjt_mobile_frontend/screen/chat_screen.dart';
-import 'package:pjt_mobile_frontend/screen/feed_screen.dart';
-import 'package:pjt_mobile_frontend/screen/home_screen.dart';
-import 'package:pjt_mobile_frontend/screen/login_screen.dart';
-import 'package:pjt_mobile_frontend/screen/profile_screen.dart';
-import 'package:pjt_mobile_frontend/screen/search_screen.dart';
-import 'package:pjt_mobile_frontend/sevice/data_service.dart';
+import 'package:pjt_mobile_frontend/view/chat_screen.dart';
+import 'package:pjt_mobile_frontend/view/feed_screen.dart';
+import 'package:pjt_mobile_frontend/view/home_screen.dart';
+import 'package:pjt_mobile_frontend/view/login_screen.dart';
+import 'package:pjt_mobile_frontend/view/profile_screen.dart';
+import 'package:pjt_mobile_frontend/view/search_screen.dart';
+import 'package:pjt_mobile_frontend/view_model/data_service.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
