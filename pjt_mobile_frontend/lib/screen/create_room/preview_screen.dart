@@ -150,7 +150,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('일시'),
                                 width: 80,
                               ),
-                              Text('${dataMap['time']}'),
+                              Text('${dataMap['date']} ${dataMap['time']}'),
                             ],
                           ),
                           Row(
@@ -159,7 +159,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 child: Text('참여 유형'),
                                 width: 80,
                               ),
-                              Text('${dataMap['onAndOffLine']}'),
+                              Text('${dataMap['gatheringWay']}'),
                             ],
                           ),
                           Row(

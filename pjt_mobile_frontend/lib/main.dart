@@ -45,6 +45,10 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
             fontSize: _calculateFontSize(context, 0.036), // 여기에 폰트 크기 비율을 넣습니다.
           ),
+          subtitle2: TextStyle(
+            color: DARKGREY,
+            fontSize: _calculateFontSize(context, 0.04), // 여기에 폰트 크기 비율을 넣습니다.
+          ),
         ),
       ),
       home: MyBottomNavigationBar(),

@@ -25,13 +25,20 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
   bool _isMaxNumeric = true;
   bool _showMinError = false;
   bool _showMaxError = false;
+  bool _dateSelect = false;
+  bool _timeSelect = false;
   String selectedOption = '오프라인'; // 선택된 라디오 버튼의 값을 저장할 변수
   List<String> searchResults = [];
   String addressJSON = '';
+  String gatheringWay = '';
   DateTime selectedDate = DateTime(
     DateTime.now().year,
     DateTime.now().month,
     DateTime.now().day,
+  );
+  DateTime selectedTime = DateTime(
+    DateTime.now().hour,
+    DateTime.now().minute,
   );
   @override
   void dispose() {
@@ -69,7 +76,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     if (title.isNotEmpty && content.isNotEmpty) {
       // 제목과 내용을 하나의 문자열로 합친다.
       String result =
-          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $addressJSON, addressDetail: $addressDetail, date: $date, time: $time, onAndOffLine: $onAndOffLine';
+          'title: $title, teamInfo: $teamInfo, tag: $tag, minNum: $minNum, maxNum: $maxNum, content: $content, address: $addressJSON, addressDetail: $addressDetail, date: ${selectedDate.year}년 ${selectedDate.month}월 ${selectedDate.day}일, time: ${selectedTime.hour}시 ${selectedTime.minute}분, onAndOffLine: $onAndOffLine, gatheringWay: $gatheringWay';
       // 데이터를 리스트에 저장
       searchResults.add(result);
 
@@ -95,7 +102,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
     }
   }
 
-  void onHeartPressed() {
+  void onDatePressed() {
     //dialog
     showCupertinoDialog(
       context: context,
@@ -106,20 +113,97 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
           child: Container(
             color: Colors.white,
             height: 300.0,
-            child: CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.date,
-              initialDateTime: selectedDate,
-              minimumDate: DateTime(
-                DateTime.now().year,
-                DateTime.now().month,
-                DateTime.now().day,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: CupertinoDatePicker(
+                      mode: CupertinoDatePickerMode.date,
+                      initialDateTime: selectedDate,
+                      minimumDate: DateTime(
+                        DateTime.now().year,
+                        DateTime.now().month,
+                        DateTime.now().day,
+                      ),
+                      onDateTimeChanged: (DateTime date) {
+                        setState(() {
+                          selectedDate = date;
+                        });
+                        ;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: BUTTON_COLOR, // 버튼 배경색 변경
+                          onPrimary: Colors.white, // 텍스트 색 변경
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _dateSelect = true;
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: Text('입력'),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              onDateTimeChanged: (DateTime date) {
-                setState(() {
-                  selectedDate = date;
-                });
-                ;
-              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void onTimePressed() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext builderContext) {
+        return Container(
+          height: 250.0,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: CupertinoDatePicker(
+                    mode: CupertinoDatePickerMode.time,
+                    initialDateTime: selectedTime,
+                    onDateTimeChanged: (DateTime newDateTime) {
+                      // Handle the selected time
+                      setState(() {
+                        selectedTime = newDateTime;
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: BUTTON_COLOR, // 버튼 배경색 변경
+                        onPrimary: Colors.white, // 텍스트 색 변경
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _timeSelect = true;
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Text('입력'),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
@@ -424,28 +508,37 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: TextField(
-                                      controller: addressController,
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          addressJSON.isEmpty
-                                              ? '주소를 입력하세요'
-                                              : addressJSON,
-                                        ),
-                                        filled: true, // 입력 상자를 채우도록 설정
-                                        fillColor:
-                                            Colors.grey[200], // 입력 상자의 배경 색상 설정
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10.0), // 보더 radius 설정
-                                          borderSide: BorderSide
-                                              .none, // 포커스 없을 때 보더 없애기
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10.0), // 포커스 시 보더 radius 설정
-                                          borderSide:
-                                              BorderSide.none, // 포커스 시 보더 없애기
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        KopoModel model = await Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                            builder: (context) => RemediKopo(),
+                                          ),
+                                        );
+                                        print(model.toJson());
+                                        setState(() {
+                                          addressJSON = '${model.address}';
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              12, 20, 12, 20),
+                                          child: addressJSON.isEmpty
+                                              ? Text(
+                                                  '주소를 입력하세요',
+                                                  style: textTheme.subtitle2,
+                                                )
+                                              : Text(
+                                                  '${addressJSON}',
+                                                  style: textTheme.bodyText1,
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -455,7 +548,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                                   ),
                                   Container(
                                     width: 65,
-                                    height: 58,
+                                    height: 60,
                                     child: ElevatedButton(
                                       onPressed: () async {
                                         KopoModel model = await Navigator.push(
@@ -486,7 +579,10 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                               TextField(
                                 controller: addressDetailController,
                                 decoration: InputDecoration(
-                                  label: Text('상세 주소를 입력하세요'),
+                                  label: Text(
+                                    '상세 주소를 입력하세요',
+                                    style: textTheme.subtitle2,
+                                  ),
                                   filled: true, // 입력 상자를 채우도록 설정
                                   fillColor:
                                       Colors.grey[200], // 입력 상자의 배경 색상 설정
@@ -520,7 +616,7 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                       height: 15,
                     ),
                     GestureDetector(
-                      onTap: onHeartPressed,
+                      onTap: onDatePressed,
                       child: Container(
                         height: 60,
                         width: double.infinity,
@@ -530,31 +626,45 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
-                          child: Text(
-                            '${selectedDate.year}년 ${selectedDate.month}월 ${selectedDate.day}일',
-                            style: textTheme.bodyText1,
-                          ),
+                          child: _dateSelect == false
+                              ? Text(
+                                  '날짜 선택',
+                                  style: textTheme.subtitle2,
+                                )
+                              : Text(
+                                  '${selectedDate.year}년 ${selectedDate.month}월 ${selectedDate.day}일',
+                                  style: textTheme.bodyText1,
+                                ),
                         ),
                       ),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    TextField(
-                      controller: timeController,
-                      decoration: InputDecoration(
-                        labelText: '시간을 설정하세요',
-                        filled: true, // 입력 상자를 채우도록 설정
-                        fillColor: Colors.grey[200], // 입력 상자의 배경 색상 설정
-                        border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // 보더 radius 설정
-                          borderSide: BorderSide.none, // 포커스 없을 때 보더 없애기
+                    GestureDetector(
+                      onTap: onTimePressed,
+                      child: Container(
+                        height: 60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(10.0), // 포커스 시 보더 radius 설정
-                          borderSide: BorderSide.none, // 포커스 시 보더 없애기
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
+                          child: _timeSelect == false
+                              ? Text(
+                                  '시간 선택',
+                                  style: textTheme.subtitle2,
+                                )
+                              : Text(
+                                  selectedTime.minute.toInt() < 10
+                                      ? selectedTime.hour.toInt() < 10
+                                          ? '0${selectedTime.hour} : 0${selectedTime.minute}'
+                                          : '${selectedTime.hour} : 0${selectedTime.minute}'
+                                      : '${selectedTime.hour} : ${selectedTime.minute}',
+                                  style: textTheme.bodyText1,
+                                ),
                         ),
                       ),
                     ),
@@ -572,32 +682,65 @@ class _CreateGatherRoomState extends State<CreateGatherRoom> {
                     Row(
                       children: [
                         Expanded(
-                          child: Container(
-                            height: 180,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 1.0, // 보더의 두께
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                gatheringWay = '승인제';
+                              });
+                              print('$gatheringWay');
+                            },
+                            child: Container(
+                              height: 180,
+                              decoration: BoxDecoration(
+                                color: gatheringWay == '승인제'
+                                    ? Colors.white
+                                    : Colors.transparent,
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.0, // 보더의 두께
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
+                              child: Center(
+                                  child: Text(
+                                '승인제',
+                                style: gatheringWay == '승인제'
+                                    ? TextStyle(color: Colors.black)
+                                    : TextStyle(color: Colors.white),
+                              )),
                             ),
-                            child: Center(child: Text('승인제')),
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 180,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 1.0, // 보더의 두께
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                gatheringWay = '선착순';
+                              });
+                              print('$gatheringWay');
+                            },
+                            child: Container(
+                              height: 180,
+                              decoration: BoxDecoration(
+                                color: gatheringWay == '선착순'
+                                    ? Colors.white
+                                    : Colors.transparent,
+                                border: Border.all(
+                                  color: Colors.grey,
+                                  width: 1.0, // 보더의 두께
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
+                              child: Center(
+                                child: Text('선착순',
+                                    style: gatheringWay == '선착순'
+                                        ? TextStyle(color: Colors.black)
+                                        : TextStyle(color: Colors.white)),
+                              ),
                             ),
-                            child: Center(child: Text('선착순')),
                           ),
                         ),
                       ],
